@@ -83,6 +83,12 @@ class RasterDEMTileSource extends RasterTileSource implements Source {
             }
 
             if (dem) {
+                // options.offset
+                if (dem.floatView && this._options.offset) {
+                    for (let i = 0; i < dem.floatView.length; i++) {
+                        dem.floatView[i] += this._options.offset;
+                    }
+                }
                 tile.dem = dem;
                 tile.dem.onDeserialize();
                 tile.needsHillshadePrepare = true;
